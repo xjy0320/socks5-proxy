@@ -28,12 +28,13 @@ DEMO
 搭建方法很简单，直接拿的github上的项目来用https://github.com/40t/socks5-proxy。需要提前安装好go环境，具体怎么安装go环境之前小姐姐的一篇搭建傻妞的文章上面有，不同cpu架构选择用不同架构的go安装包即可。
 
 搭建步骤很简单，步骤如下
-
+```
 git clone https://ghproxy.com/github.com/40t/socks5-proxy.git /root/socks5
 cd /root/socks5
 go get -v -u github.com/40t/socks5-proxy
 cp -rf $(go env GOPATH)/bin/socks5-proxy /usr/local/bin
 socks5-proxy   
+```
 socks5-proxy这个命令直接就启动socks5服务端了，默认端口是9999。但是我不想用这个端口，所以按照项目说明socks5-proxy -p [port] -a [username:password] 添加了启动参数
 
 socks5-proxy -p 13200  
