@@ -23,8 +23,9 @@ DEMO
 ![image](https://github.com/40t/socks5-proxy/raw/master/README.jpg)
 
 
-
 玩客云搭建socks5服务
+----
+
 搭建方法很简单，直接拿的github上的项目来用https://github.com/40t/socks5-proxy。需要提前安装好go环境，具体怎么安装go环境之前小姐姐的一篇搭建傻妞的文章上面有，不同cpu架构选择用不同架构的go安装包即可。
 
 搭建步骤很简单，步骤如下
