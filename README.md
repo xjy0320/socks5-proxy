@@ -26,7 +26,7 @@ DEMO
 玩客云搭建socks5服务
 ----
 
-搭建方法很简单，直接拿的github上的项目来用https://github.com/40t/socks5-proxy。需要提前安装好go环境，具体怎么安装go环境之前小姐姐的一篇搭建傻妞的文章上面有，不同cpu架构选择用不同架构的go安装包即可。
+搭建方法很简单，直接拿的github上的项目来用 https://github.com/40t/socks5-proxy 需要提前安装好go环境，具体怎么安装go环境之前小姐姐的一篇搭建傻妞的文章上面有，不同cpu架构选择用不同架构的go安装包即可。
 
 搭建步骤很简单，步骤如下
 ```
@@ -46,8 +46,12 @@ socks5-proxy -p 13200
 ```
 pm2 start "socks5-proxy -p 13200"
 ```
-家里没有公网ip怎么办
-这种情况就跟我一样了，家里没有公网ip，那服务器怎么连家里的socks5代理呢。曲线救国，frp内网穿透。在github上面https://github.com/fatedier/frp/releases下载frp。服务器上面用到frps和frps.ini，客户端用frpc和frpc.ini
+
+
+家里没有公网ip怎么办务
+----
+
+这种情况就跟我一样了，家里没有公网ip，那服务器怎么连家里的socks5代理呢。曲线救国，frp内网穿透。在github上面https://github.com/fatedier/frp/releases 下载frp。服务器上面用到frps和frps.ini，客户端用frpc和frpc.ini
 
 frps搭建
 
@@ -73,12 +77,15 @@ vi /lib/systemd/system/frps.service
 Description=fraps service
 After=network.target network-online.target syslog.target
 Wants=network.target network-online.target
+
 [Service]
 Type=simple
+
 #启动服务的命令（此处写你的frps的实际安装目录）
 #例如我服务器上的frps位于/root/frp/下面
 #那么我得ExecStart=/root/frp/frps -c /root/frp/frps.ini
 ExecStart=/your/path/frps -c /your/path/frps.ini
+
 [Install]
 WantedBy=multi-user.target
 ```
@@ -112,6 +119,8 @@ remote_port = 远程服务器上的端口号，即你想在frps上开放的端�
 同样需要配置开机自启，参照上面建立frpc.service即可，即将frps改成frpc
 
 服务器上面polipo配置代理
+----
+
 服务器防火墙记得开放对应端口，我配置的远程端口为14200，即防火墙开放14200（这里云服务商提供的防火墙可以不用开放，只需要开放服务器系统上的防火墙）。查了些相关资料发现socks5并不是所有服务都能使用的，有的服务还不支持使用带用户认证的socks5，所以我选择用polipo将socks5转变成http在服务器上面使用（疯狂套娃）。
 
 虽然ubuntu好像可以直接apt install polipo
@@ -164,6 +173,7 @@ curl --connect-timeout 2 -x 127.0.0.1:14300 cip.cc
 正确无误的话，应该显示的是家里的ip
 
 青龙等容器使用代理
+----
 青龙好像是可以通过自身的配置文件去使用代理，不过我还是用通用的方法，即docker run命令上添加-e环境变量
 
 比如青龙的docker run命令
